@@ -42,14 +42,17 @@ for frm in frms_to_plot:
 
 	# Plot regularly in matplotlib first
 	ax1 = plt.subplot(211)
-	plt.scatter(obs[:, 0], obs[:, 2], color='blue', s=15)
-	plt.plot(true[:, 0], true[:, 1], color='k', lw=4)
-	plt.plot(path[0, :, 0], path[frm, :, 1], color='red', lw=6, ls='--')
+	plt.scatter(obs[:, 0], obs[:, 2], color='blue', s=30, label='noisy data')
+	plt.plot(true[:, 0], true[:, 1], color='k', lw=4, label='true')
+	plt.plot(path[0, :, 0], path[frm, :, 1], color='red', lw=6, 
+			 ls='--', label='fit')
 	plt.xticks([])
 	plt.yticks(np.arange(-100, 100, 40), fontsize=35)
 	plt.ylabel(r'$V(t)$ (mV)', fontsize=35)
 	plt.xlim(true[0, 0], true[-1, 0])
 	plt.ylim(-90, 50)
+	plt.legend(bbox_to_anchor=(.85, .5), loc=0, fontsize=35, frameon=False)
+	
 	ax2 = plt.subplot(212)
 	plt.plot(true[:, 0], true[:, 2], color='k', lw=7)
 	plt.plot(path[0, :, 0], path[frm, :, 2], color='red', lw=6, ls='--')
@@ -86,7 +89,7 @@ video.release()
 true_params = [15, 20, 2, 50, 100, 70, 0.12, 1.2, 18, 10]
 params = np.load('../data/results/all/params_%d.npy' % opt_idx)
 fig = plt.figure()
-fig.set_size_inches(5, 5)
+fig.set_size_inches(3.5, 5)
 video = None
 x = range(len(true_params)) 
 for frm in frms_to_plot:
@@ -94,17 +97,19 @@ for frm in frms_to_plot:
 
 	# Plot regularly in matplotlib first
 	ax = plt.subplot(111)
-	plt.scatter(x, true_params, color='k', s=100, alpha=0.5)
-	plt.scatter(x, params[frm, :], color='red', s=100, alpha=0.5)
+	plt.scatter(x, true_params, color='k', s=100, alpha=0.5, label='true')
+	plt.scatter(x, params[frm, :], color='red', s=100, alpha=0.5, label='fit')
 	plt.xticks(x, labels=[r'$g_f$', r'$g_s$', r'$g_L$', r'$E_{Na}$', 
 						  r'-$E_K$', r'-$E_{L}$', r'$\phi_W$', r'$\beta_m$', 
-						  r'$\gamma_m^{-1}$', r'$\gamma_w^{-1}$'], fontsize=16)
+						  r'$\gamma_m^{-1}$', r'$\gamma_w^{-1}$'], fontsize=13)
 	plt.yticks(np.arange(-150, 150, 30), fontsize=16)	
 	plt.ylim(-35, 125)
+	plt.legend(bbox_to_anchor=(1.1, 1), loc=1, fontsize=15, frameon=True)
 	for axis in ['right','top']:
 		ax.spines[axis].set_linewidth(0)
 	for axis in ['left', 'bottom']:
 		ax.spines[axis].set_linewidth(3)
+	plt.tight_layout()
 	fig.canvas.draw()
 
 	# Save to pixelated array
