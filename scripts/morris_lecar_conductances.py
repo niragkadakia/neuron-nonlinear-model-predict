@@ -70,9 +70,9 @@ anneal1.anneal(X0, P0, alpha, beta_array, RM, RF0, Lidx, Pidx, Uidx,
 				opt_args=BFGS_options, bounds=bounds, adolcID=0)
 
 # Save the results
-anneal1.save_paths("%s/ML_cond/paths_%d.npy" % (output_data_dir, seed))
-anneal1.save_params("%s/ML_cond/params_%d.npy" % (output_data_dir, seed))
-anneal1.save_action_errors("%s/ML_cond/action_errors_%d.npy" 
+anneal1.save_paths("%s/cond/paths_%d.npy" % (output_data_dir, seed))
+anneal1.save_params("%s/cond/params_%d.npy" % (output_data_dir, seed))
+anneal1.save_action_errors("%s/cond/action_errors_%d.npy" 
 							% (output_data_dir, seed))
 
 
