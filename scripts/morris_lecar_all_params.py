@@ -45,7 +45,7 @@ observations = data[:, [2]]
 # Parameters now include time-dependent nudging terms; state space is 2D
 D = 2
 Lidx = [0]
-Pidx = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+Pidx = range(10)
 Uidx = []
 state_bounds = [[-100, 100]] + [[0, 1]]
 param_bounds =  [[.01, 200]]*10
@@ -70,8 +70,9 @@ anneal1.anneal(X0, P0, alpha, beta_array, RM, RF0, Lidx, Pidx, Uidx,
 				opt_args=BFGS_options, bounds=bounds, adolcID=0)
 
 # Save the results
-anneal1.save_paths("%s/paths_%d.npy" % (output_data_dir, seed))
-anneal1.save_params("%s/params_%d.npy" % (output_data_dir, seed))
-anneal1.save_action_errors("%s/action_errors_%d.npy" % (output_data_dir, seed))
+anneal1.save_paths("%s/all/paths_%d.npy" % (output_data_dir, seed))
+anneal1.save_params("%s/all/params_%d.npy" % (output_data_dir, seed))
+anneal1.save_action_errors("%s/all/action_errors_%d.npy" 
+						   % (output_data_dir, seed))
 
 

@@ -48,14 +48,14 @@ Lidx = [0]
 Pidx = [0, 1, 2]
 Uidx = []
 state_bounds = [[-100, 100]] + [[0, 1]]
-param_bounds =  [[.01, 200]]*10
+param_bounds =  [[.01, 200]]*3
 bounds = state_bounds + param_bounds
 
 # Initial conditions; initial forcing params set randomly to bounds
 np.random.seed(seed)
 X0 = np.random.uniform(-100, 100, (Nn, D))
 np.random.seed(seed)
-P0 = [np.array([np.random.uniform(1, 200)])]*10
+P0 = [np.array([np.random.uniform(1, 200)])]*3
 		
 		
 # Run the annealing using L-BFGS-B
@@ -70,8 +70,9 @@ anneal1.anneal(X0, P0, alpha, beta_array, RM, RF0, Lidx, Pidx, Uidx,
 				opt_args=BFGS_options, bounds=bounds, adolcID=0)
 
 # Save the results
-anneal1.save_paths("%s/paths_%d.npy" % (output_data_dir, seed))
-anneal1.save_params("%s/params_%d.npy" % (output_data_dir, seed))
-anneal1.save_action_errors("%s/action_errors_%d.npy" % (output_data_dir, seed))
+anneal1.save_paths("%s/ML_cond/paths_%d.npy" % (output_data_dir, seed))
+anneal1.save_params("%s/ML_cond/params_%d.npy" % (output_data_dir, seed))
+anneal1.save_action_errors("%s/ML_cond/action_errors_%d.npy" 
+							% (output_data_dir, seed))
 
 
