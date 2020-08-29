@@ -1,6 +1,6 @@
 """
-Morris Lecar model estimated using optimal control 
-dynamical state and parameter estimation.
+Morris Lecar model estimated using varational annealing 
+algorithm (Ye, Kadakia et al Biological Cybernetics 2014). 
 
 Created by Nirag Kadakia at 12:12 08-28-2020
 This work is licensed under the 
@@ -16,7 +16,7 @@ from scipy.integrate import odeint
 import sys, time
 from varanneal import va_ode
 sys.path.append('../src/')
-from est_funcs import ML_est_all_params
+from est_funcs import ML_est_conductances
 
 
 output_data_dir = '../data/results'
@@ -45,7 +45,7 @@ observations = data[:, [2]]
 # Parameters now include time-dependent nudging terms; state space is 2D
 D = 2
 Lidx = [0]
-Pidx = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+Pidx = [0, 1, 2]
 Uidx = []
 state_bounds = [[-100, 100]] + [[0, 1]]
 param_bounds =  [[.01, 200]]*10
@@ -62,7 +62,7 @@ P0 = [np.array([np.random.uniform(1, 200)])]*10
 BFGS_options = {'gtol':1.0e-8, 'ftol':1.0e-8, 
 			    'maxfun':1000000, 'maxiter':1000000}
 anneal1 = va_ode.Annealer()
-anneal1.set_model(ML_est_all_params, D)
+anneal1.set_model(ML_est_conductances, D)
 anneal1.set_data(observations, t=Tt, stim=stim)
 anneal1.anneal(X0, P0, alpha, beta_array, RM, RF0, Lidx, Pidx, Uidx, 
 				action='A_gaussian', dt_model=dt, 
