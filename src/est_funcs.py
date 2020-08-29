@@ -24,7 +24,7 @@ def ML_est_all_params(t, X, args):
 	w = X[:, 1]
 	
 	inv_cap = 1./2.5
-	g_fast = params[:, 0] #20
+	g_fast = params[:, 0] #15
 	g_slow = params[:, 1] #20
 	g_leak = params[:, 2] #2
 	E_Na = params[:, 3] #50 
