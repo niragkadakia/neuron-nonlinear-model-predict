@@ -1,4 +1,4 @@
 /.ipynb_checkpoints
 *.pyc
-data/results/*.npy
+data/results/
 sbatch/out.txt
