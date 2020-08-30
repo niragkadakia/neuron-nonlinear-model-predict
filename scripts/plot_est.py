@@ -111,7 +111,7 @@ for frm in frms_to_plot:
 		ax.spines[axis].set_linewidth(3)
 	plt.tight_layout()
 	fig.canvas.draw()
-
+	
 	# Save to pixelated array
 	data = np.frombuffer(fig.canvas.tostring_rgb(), dtype=np.uint8)
 	data = data.reshape(fig.canvas.get_width_height()[::-1] + (3,))
